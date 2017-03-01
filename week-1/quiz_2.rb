@@ -20,8 +20,10 @@ class UnionFind
     this.is_own_root? current ? current : this.root current
   end
 
-  def findLargest(i)
+  def findGreatest(i)
     # returns largest element in the connected component containing i
+
+    # Strategy: Add compression. That way, you can start with this.parents.last and check if the root matches
   end
 
   def connected?(i, j)
@@ -29,15 +31,15 @@ class UnionFind
   end
 
   def union(first, second)
-    firstTreeRoot = root(first)
-    secondTreeRoot = root(second)
+    first_tree_root = root(first)
+    second_tree_root = root(second)
 
-    if this.sizes[firstTreeRoot] > this.sizes[secondTreeRoot]
-      this.parents[secondTreeRoot] = firstTreeRoot
-      this.sizes[firstTreeRoot] += this.sizes[secondTreeRoot]
+    if this.sizes[first_tree_root] > this.sizes[second_tree_root]
+      this.parents[second_tree_root] = first_tree_root
+      this.sizes[first_tree_root] += this.sizes[second_tree_root]
     else
-      this.parents[secondTreeRoot] = firstTreeRoot
-      this.sizes[secondTreeRoot] += this.sizes[firstTreeRoot]
+      this.parents[second_tree_root] = first_tree_root
+      this.sizes[second_tree_root] += this.sizes[first_tree_root]
     end
   end
 
