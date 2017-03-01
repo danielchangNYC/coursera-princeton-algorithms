@@ -1,5 +1,4 @@
 class SinglyLinkedList
-  class Terminator; end
   class Node
     attr_accessor :data, :reference
 
@@ -15,29 +14,36 @@ class SinglyLinkedList
 
   attr_accessor :first_node
 
-  def add_node(data)
-    if first_node.any?
-      last_node.reference = Node.new(data, Terminator)
-    else
-      self.first_node = Node.new(data, Terminator)
-    end
-  end
-
-  def remove_node(data)
+  def find(data)
     last_node = nil
     current_node = first_node
 
     loop do
       next_node = current_node.next
 
-      if next_node.is_a? Terminator
+      if next_node.any?
         break
       elsif data == current_node.data
-        last_node && last_node.reference = next_node
         break
       else
         last_node = current_node
         current_node = next_node
       end
     end
+  end
+
+  def add_to_tail(data)
+    if first_node.any?
+      last_node.reference = Node.new(data)
+    else
+      self.first_node = Node.new(data)
+    end
+  end
+
+  def remove_node(data)
+    last_node = find(data)
+    last_node.any? ?
+      last_node.reference = next_node :
+      puts "No node found with data: #{data}"
+  end
 end
