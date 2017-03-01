@@ -11,33 +11,39 @@
 
 class UnionFind
   def initialize(size)
-    this.ids = (1..size).to_a
+    this.parents = (1..size).to_a
+    this.sizes = Array.new(size, 1)
   end
 
   def root(i)
     current = i
-    while this.is_own_root? current
-      current = this.ids[current]
-    end
-    current
+    this.is_own_root? current ? current : this.root current
   end
 
   def findLargest(i)
     # returns largest element in the connected component containing i
   end
 
-  def connected?(p, q)
-    # are p and q connected?
+  def connected?(i, j)
+    this.root i === this.root j
   end
 
-  def union()
-    # merge smaller tree from p and q
-    # update sizes
+  def union(first, second)
+    firstTreeRoot = root(first)
+    secondTreeRoot = root(second)
+
+    if this.sizes[firstTreeRoot] > this.sizes[secondTreeRoot]
+      this.parents[secondTreeRoot] = firstTreeRoot
+      this.sizes[firstTreeRoot] += this.sizes[secondTreeRoot]
+    else
+      this.parents[secondTreeRoot] = firstTreeRoot
+      this.sizes[secondTreeRoot] += this.sizes[firstTreeRoot]
+    end
   end
 
   private
 
   def is_own_root?(i)
-    current == this.ids[current]
+    current == this.parents[current]
   end
 end
