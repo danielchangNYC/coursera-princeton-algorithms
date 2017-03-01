@@ -21,7 +21,7 @@
   Prompt asks for earliest point where all nodes are in one component.
 */
 
-// VANILLA.JS
+// VANILLA JS
 
 var FriendshipFinder = function(population) {
   // this.population = Array.apply(null, Array(population)).map(function (_, i) {return i;});
