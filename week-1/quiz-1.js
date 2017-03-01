@@ -72,4 +72,16 @@ FriendshipFinder.prototype.makeFriendship = function(person1, person2) {
   }
 
   this.groups--;
+
+  if (this.groups === 1) {
+    console.log('Everyone is in one group!');
+  }
 };
+
+// Evaluator
+
+var uf = new FriendshipFinder(5);
+uf.makeFriendship(1, 4);
+uf.makeFriendship(2, 3);
+uf.makeFriendship(1, 3);
+uf.makeFriendship(0, 3);
