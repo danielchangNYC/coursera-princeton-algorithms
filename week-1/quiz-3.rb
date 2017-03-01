@@ -36,8 +36,11 @@ class UnionFind
   end
 
   def delete(i)
-    # Remove x from S
+    roots.delete_at i
+
     # Find the successor of x: the smallest y in S such that y≥x.
+    # QUESTION: What do we mean by "successor" here? Is it the smallest ROOT greater than the root of the index just deleted?
+    roots[i]
   end
 
   def connected?(i, j)
