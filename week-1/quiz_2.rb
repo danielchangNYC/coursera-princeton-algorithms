@@ -10,42 +10,62 @@
 =end
 
 class UnionFind
+  attr_accessor :roots, :sizes
+
   def initialize(size)
-    this.parents = (1..size).to_a
-    this.sizes = Array.new(size, 1)
+    self.roots = (0..size - 1).to_a
+    self.sizes = Array.new(size, 1)
   end
 
   def root(i)
     current = i
-    this.is_own_root? current ? current : this.root current
+    if is_own_root? current
+      current
+    else
+      roots[current] = root(roots[current]) # Compression
+      roots[current]
+    end
   end
 
-  def findGreatest(i)
-    # returns largest element in the connected component containing i
-
-    # Strategy: Add compression. That way, you can start with this.parents.last and check if the root matches
+  def find_greatest(i)
+    # Since roots is  compressed, we can traverse backwards through roots and return first match
+    current_root = root i
+    roots.reverse.each_with_index do |value, index|
+      current_idx = roots.length - index - 1
+      break current_idx if root(current_idx) == current_root
+    end
   end
 
   def connected?(i, j)
-    this.root i === this.root j
+    root(i) === root(j)
   end
 
   def union(first, second)
     first_tree_root = root(first)
     second_tree_root = root(second)
 
-    if this.sizes[first_tree_root] > this.sizes[second_tree_root]
-      this.parents[second_tree_root] = first_tree_root
-      this.sizes[first_tree_root] += this.sizes[second_tree_root]
+    if sizes[first_tree_root] > sizes[second_tree_root]
+      roots[second_tree_root] = first_tree_root
+      sizes[first_tree_root] += sizes[second_tree_root]
     else
-      this.parents[second_tree_root] = first_tree_root
-      this.sizes[second_tree_root] += this.sizes[first_tree_root]
+      roots[second_tree_root] = first_tree_root
+      sizes[second_tree_root] += sizes[first_tree_root]
     end
   end
 
   private
 
   def is_own_root?(i)
-    current == this.parents[current]
+    i == roots[i]
   end
 end
+
+
+# Evaluator Script
+
+uf = UnionFind.new(9)
+uf.union(4, 1)
+uf.union(4, 6)
+uf.union(7, 8)
+uf.union(4, 7)
+uf.find_greatest 1 # => should be 8
