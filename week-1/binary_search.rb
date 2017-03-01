@@ -8,6 +8,8 @@ Method: Compare key against middle entry
 
 KEY: USE THE INDEX FOR HI AND LOW
 
+SEARCH COST: At most 1 + lgN compares
+
 =end
 
 def binary_search(data, key)
