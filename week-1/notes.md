@@ -98,3 +98,13 @@ In other words, the Union Find Data Structure **defines a data type with the met
 - Big Idea:
   - Just after computing root of p, set the id of each examined node to point to that root
 
+=========================================
+
+## Scientific Method Applied to Algorithms
+
+1. OBSERVE some feature of the natural world
+2. HYPOTHESIZE a model that's consistent with the observations
+3. PREDICT events using hte hypothesis
+4. VERIFY predictions by making further observations
+5. VALIDATE by repeating until the hypothesis and observations agree
+
