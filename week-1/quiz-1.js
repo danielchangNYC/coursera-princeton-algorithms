@@ -79,6 +79,7 @@ FriendshipFinder.prototype.makeFriendship = function(person1, person2) {
 };
 
 // Evaluator
+// Opting out of the timestamp part
 
 var uf = new FriendshipFinder(5);
 uf.makeFriendship(1, 4);
