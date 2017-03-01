@@ -1,3 +1,5 @@
+# https://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/linked%20lists.html
+
 class SinglyLinkedList
   class Node
     attr_accessor :data, :reference
