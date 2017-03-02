@@ -1,4 +1,27 @@
-# STACKS: FILO
+=begin
+  STACKS: FILO
+
+  Array Stack Considerations:
+    Underflow: Can't remove from empty stack
+    Overflow: Can't add to stack at max capacity
+    Loitering: In some languages, you have to make sure that removed items can be garbage-collected
+
+    Resizing? DO THIS INFREQUENTLY
+      - Increasing Size
+        - Bad: Resize array EACH TIME (costly, keep copying arrays). N^2 complexity for inserting first N objects
+        - Good: Repeated doubling. When at capacity, create new stack double the size.
+      - Decreasing Size
+        - Bad: Repeating shrinking. If client "thrashes" (alternate push and pop) right at a shrink/grow mark, it's costly
+        - Good: Shrink when the array is only 1/4 full.
+      - Cost for PUSH and POP?
+        - BEST CASE: 1 operation
+        - WORST CASE: N (for grow or shrink)
+
+  Linked List Stack Considerations:
+    PROs: Dynamic Memory Allocation
+    CONs: Slower look-up, more memory
+=end
+
 
 # Array implementation uses a set size in Java. Simulating here.
 
@@ -26,6 +49,10 @@ class ArrayStack
   def join(delimiter = " ")
     stack.join delimiter
   end
+
+  def resize
+    # see notes above
+  end
 end
 
 # Test
@@ -50,9 +77,11 @@ as.pop
 as.join # "to be not to"
 
 # (Singly) LINKED LIST STACK
+# Appends and pops from FIRST POSITION
 # Push and pop from BEGINNING of stack so you don't have to traverse to add!
-# PRO: Dynamic Memory Allocation
-# CON: Slower look-up, more memory
+
+# PROs: Dynamic Memory Allocation
+# CONs: Slower look-up, more memory
 
 class LinkedListStack
   attr_accessor :first
