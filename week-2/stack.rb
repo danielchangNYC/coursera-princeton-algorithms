@@ -1,4 +1,58 @@
-# FILO
+# STACKS: FILO
+
+# Array implementation uses a set size in Java. Simulating here.
+
+class ArrayStack
+  attr_accessor :stack, :size
+
+  def initialize(size)
+    self.stack = []
+    self.size = size
+  end
+
+  def push(data)
+    raise 'Stack Overflow!' if stack.length >= size
+    stack.push data
+  end
+
+  def pop
+    stack.pop
+  end
+
+  def empty?
+    stack.any?
+  end
+
+  def join(delimiter = " ")
+    stack.join delimiter
+  end
+end
+
+# Test
+as = ArrayStack.new 7
+
+as.pop # nothing to pop
+as.join
+as.push('to')
+as.push('be')
+as.push('or')
+as.join
+as.pop
+as.push('not')
+as.push('to')
+as.push('be')
+as.push('that')
+as.push('is')
+as.pop
+as.pop
+as.pop
+
+as.join # "to be not to"
+
+# (Singly) LINKED LIST STACK
+# Push and pop from BEGINNING of stack so you don't have to traverse to add!
+# PRO: Dynamic Memory Allocation
+# CON: Slower look-up, more memory
 
 class LinkedListStack
   attr_accessor :first
