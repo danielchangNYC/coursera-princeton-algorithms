@@ -19,3 +19,9 @@ Interface:
   - pop()
   - isEmpty
 
+### Queues
+
+Interface:
+  - enqueue
+  - dequeue
+  - isEmpty
