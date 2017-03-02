@@ -1,5 +1,11 @@
 =begin
   QUEUES: FIFO
+
+  TODO For ArrayQueue
+    Array of set capacity
+    Memoize head and tail
+    Updating head and tail requires modulo capacity
+    Resizing same as stacks
 =end
 
 class ArrayQueue

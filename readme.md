@@ -6,6 +6,9 @@ Big Ideas:
     - Find algorithm to solve it
     - Evaluate speed and memory (Big O)
     - Iterate improvements
+  - For each alg
+    - What does the data structure look like? (behaviors?)
+    - Implementations && costs?
 
 Algorithms:
   - Union Find
@@ -14,3 +17,6 @@ Algorithms:
       - Weighted
       - Compressed
   - Binary Search
+  - Stacks
+  - Queues
+  - Bags
