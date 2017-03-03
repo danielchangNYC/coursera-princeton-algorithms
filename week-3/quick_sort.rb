@@ -2,7 +2,7 @@
 
 STRATEGY:
   - shuffle the array
-  - partition with an anchor point (just use the first element)
+  - rearrange, comparing with an anchor point (just use the first element)
     - GOAL:
       - entry a[j] is in place
       - no larger entry to the left
@@ -27,28 +27,50 @@ def quick_sort(a)
   a
 end
 
-def sort(a, anchor, last)
-  return a if anchor == last
-  i = anchor + 1
-  j = last
+def rearrange(a, lo, hi)
+  i = lo
+  j = hi
 
   loop do
-    i += 1 until a[i] > a[anchor] || i == last
-    j -= 1 until a[j] < a[anchor] || j == anchor
+    i += 1 until a[i] > a[lo] || i == hi
+    j -= 1 until a[j] < a[lo] || j == lo
     break if i >= j
     a[i], a[j] = a[j], a[i]
   end
 
-  # move anchor to pivot point
-    # At this point, i will be greater or equal, j will be less than or equal
-  a[j], a[anchor] = a[anchor], a[j]
-
-  # RECURSE for both halves
-  if last - anchor >= 2
-    sort a, anchor, j
-    sort a, i, last
-  end
+  a[j], a[lo] = a[lo], a[j]
+  j
 end
+
+def sort(a, lo, hi)
+  return if hi <= lo
+  j = rearrange(a, lo, hi)
+  sort(a, lo, j-1)
+  sort(a, j+1, hi)
+end
+
+# def sort(a, anchor, last)
+#   return a if anchor == last
+#   i = anchor + 1
+#   j = last
+
+#   loop do
+#     i += 1 until a[i] > a[anchor] || i == last
+#     j -= 1 until a[j] < a[anchor] || j == anchor
+#     break if i >= j
+#     a[i], a[j] = a[j], a[i]
+#   end
+
+#   # move anchor to pivot point
+#     # At this point, i will be greater or equal, j will be less than or equal
+#   a[j], a[anchor] = a[anchor], a[j]
+
+#   # RECURSE for both halves
+#   if last - anchor >= 2
+#     sort a, anchor, j
+#     sort a, i, last
+#   end
+# end
 
 # TEST
 quick_sort [1]
