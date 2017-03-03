@@ -33,14 +33,8 @@ def sort(a, anchor, last)
   j = last
 
   loop do
-    until a[i] > a[anchor] || i == last
-      i += 1
-    end
-
-    until a[j] < a[anchor] || j == anchor
-      j -= 1
-    end
-
+    i += 1 until a[i] > a[anchor] || i == last
+    j -= 1 until a[j] < a[anchor] || j == anchor
     break if i >= j
     a[i], a[j] = a[j], a[i]
   end
