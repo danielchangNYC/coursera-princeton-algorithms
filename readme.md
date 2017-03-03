@@ -22,6 +22,7 @@ Algorithms:
   - Shellsort
   - **Mergesort**
   - **Quicksort**
+  - Quick Select (related to quick sort)
 
 Data Structures:
   - Stacks

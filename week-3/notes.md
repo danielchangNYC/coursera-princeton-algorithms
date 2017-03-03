@@ -1,4 +1,9 @@
-# Week 3: Merge sort and Quick sort
+# Week 3: Merge sort, Quick sort, and Selection
+
+POSSIBLE GENERALIZATIONS:
+- Smaller sets of data: use insertion sort (10 or less)
+- Lots of dups and don't care about memory? Use merge sort
+- Else use Quick sort (make sure to shuffle!)
 
 ## Merge Sort
 

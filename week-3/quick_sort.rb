@@ -16,6 +16,23 @@ STRATEGY:
         - when both stop, SWAP THEM
       - at this point, swap a[lo] with a[j]
   - Sort each piece recursively
+
+COST:
+  WORST CASE is N^2
+    - But because of SHUFFLE, it's closer to NlogN
+    - Worst happens when array is reverse-sorted or has many dups
+  Pros:
+    - Sort in place (memory)
+    - Fastest (NlogN still but faster than merge sort)
+  Cons:
+    - Testing when pointers cross is tricky, esp w dup keys
+      - it's apparently better to stop on dup keys?
+    - Staying in bounds
+    - Preserving randomness. Shuffling needed to guarantee performance
+
+PRACTICAL IMPROVEMENTS:
+  - Use insertion sort if <10 items
+  - Use smarter pivot points: sample 3 random and get median
 =end
 
 def quick_sort(a)
