@@ -6,6 +6,10 @@
     - No larger entry to left of j
     - No smaller to right
     *** REPEAT IN ONE SUB ARRAY, depending on whether j == k
+
+  COST:
+    Quadratic worst case (but soooo unlikely with shuffle)
+    Linear time, worst case (2N compares)
 =end
 
 def quick_select(a, k)
