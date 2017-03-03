@@ -17,6 +17,11 @@ Algorithms:
       - Weighted
       - Compressed
   - Binary Search
+  - Selection Sort
+  - Insertion Sort
+  - Shellsort
+
+Data Structures:
   - Stacks
   - Queues
   - Bags
