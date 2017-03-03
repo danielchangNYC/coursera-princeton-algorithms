@@ -20,8 +20,8 @@ Algorithms:
   - Selection Sort
   - Insertion Sort
   - Shellsort
-  - Mergesort
-  - Quicksort
+  - **Mergesort**
+  - **Quicksort**
 
 Data Structures:
   - Stacks
