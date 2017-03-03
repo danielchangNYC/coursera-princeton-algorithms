@@ -1,9 +1,13 @@
 # Week 3: Merge sort, Quick sort, and Selection
 
-POSSIBLE GENERALIZATIONS:
+GENERALIZATIONS:
 - Smaller sets of data: use insertion sort (10 or less)
 - Lots of dups and don't care about memory? Use merge sort
 - Else use Quick sort (make sure to shuffle!)
+
+- WHY MERGE SORT, EVER?
+  - **Guaranteed NlogN** performance (quicksort can be quadratic in almost-impossible case)
+  - **Stability** (objs with equal keys appear in same order after-sort)
 
 ## Merge Sort
 
@@ -54,3 +58,10 @@ Complexity:
   - no larger entry to the left
   - no smaller entry to the right
 - Sort each piece recursively
+
+- Quick Select
+- Quick Sort with Dups
+  - *** Instead of putting single anchor in place, put ALL equal items in place
+  - Partition into 3 instead of 2: less, eq and greater than anchor
+  - called Dijkstra 3-way partitioning
+  - cost LINEAR, not Linearithmic!, with shuffle of course
