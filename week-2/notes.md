@@ -58,5 +58,7 @@ Shellsort
     - ex do a 7 sort, then a 3 sort, then finally your 1-sort.
 
 Shuffling
-  - In iteration i, pick integer r between 0 and 1 uniformly at random
-  - Swap a[i] and a[r]
+  - Knuth Shuffle
+    - In iteration i, pick integer r between 0 and 1 uniformly at random
+    - Swap a[i] and a[r]
+    - COST: N
