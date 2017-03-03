@@ -19,7 +19,7 @@ STRATEGY:
 =end
 
 def quick_sort(a)
-  return a if a.length < 2
+  return a if a.length <= 1
 
   a.shuffle!
 
@@ -49,8 +49,8 @@ def sort(a, anchor, last)
     # At this point, i will be greater or equal, j will be less than or equal
   a[j], a[anchor] = a[anchor], a[j]
 
-  # Do this again
-  if last - anchor > 1
+  # RECURSE for both halves
+  if last - anchor >= 2
     sort a, anchor, j
     sort a, i, last
   end
