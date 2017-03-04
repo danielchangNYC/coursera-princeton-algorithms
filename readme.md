@@ -23,8 +23,14 @@ Algorithms:
   - **Mergesort**
   - **Quicksort**
   - Quick Select (related to quick sort)
+  - 3-way quick sort
+  - Heap Sort
+  - Sequential Search
 
 Data Structures:
   - Stacks
   - Queues
-  - Bags
+  - Priority Queue
+  - Bags (Randomized Queue, rm arbitrary item)
+  - Binary Heap
+  - Binary Search Tree
