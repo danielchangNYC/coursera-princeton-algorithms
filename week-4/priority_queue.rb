@@ -60,24 +60,20 @@ class PriorityQueue
   end
 
   def sink(k)
-    child1 = 2*k
-    child2 = 2*k + 1
+    parent = k
+    child = 2 * parent
 
-    until child1 >= heap.length # no children or >= both children
-      if heap[child1] > heap[k]
-        heap[k], heap[child1] = heap[child1], heap[k]
-        k = child1
-      elsif child2 >= heap.length
-        break
-      elsif heap[child2] > heap[k]
-        heap[k], heap[child2] = heap[child2], heap[k]
-        k = child2
-      else # both children are <=
-        break
+    until child >= heap.length
+      # Promote the better child
+      if child + 1 < heap.length && heap[child] < heap[child + 1]
+        child += 1
       end
 
-      child1 = 2*k
-      child2 = 2*k + 1
+      break if heap[parent] > heap[child]
+      heap[parent], heap[child] = heap[child], heap[parent]
+
+      parent = child
+      child = 2 * parent
     end
   end
 end
