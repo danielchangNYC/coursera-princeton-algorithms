@@ -55,13 +55,17 @@ class PriorityQueue
     child1 = 2i
     child2 = 2i + 1
 
-    until (heap[child1] <= heap[i] && heap[child2] <= heap[i]) || child1 >= heap.length # no children or >= both children
+    until child1 >= heap.length # no children or >= both children
       if heap[child1] > heap[i]
         heap[i], heap[child1] = heap[child1], heap[i]
         i = child1
-      else
+      elsif child2 >= heap.length
+        break
+      elsif heap[child2] > heap[i]
         heap[i], heap[child2] = heap[child2], heap[i]
         i = child2
+      else # both children are <=
+        break
       end
 
       child1 = 2i
