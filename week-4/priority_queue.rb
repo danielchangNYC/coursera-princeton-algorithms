@@ -22,6 +22,8 @@
           - children of node are at 2k and 2k+1
         - PROMOTION: Recursively swap with parent until the heap condition is satisfied
         - DEMOTION: Check children, switch with the one that's larger. Repeat
+      - IMPROVEMENTS
+        - Use immutable keys! So client can't change them
 =end
 
 class PriorityQueue
