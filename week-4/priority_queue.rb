@@ -6,6 +6,7 @@
     Max
     Swim (Promote values)
     Sink (Demote values)
+    Remove Max (Switch root with last, remove old root, and then sink the root)
 
   Strategies:
     1. Unordered array: find max when you need it
@@ -39,7 +40,10 @@ class PriorityQueue
   end
 
   def delete_max
-    heap.delete_at 1
+    return heap[1] if heap.length == 2
+    heap[1], heap[heap.length - 1] = heap[heap.length - 1], heap[1]
+    heap.pop
+    sink 1
   end
 
   def swim(i)
