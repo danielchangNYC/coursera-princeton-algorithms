@@ -46,42 +46,58 @@ class PriorityQueue
     sink 1
   end
 
+  def empty?
+    heap.length <= 1
+  end
+
   def swim(i)
     parent = i / 2
-    until heap[i] <= heap[parent] || i <= 1
+    until (i <= 1) || (heap[i] <= heap[parent])
       heap[i], heap[parent] = heap[parent], heap[i]
       i = parent
       parent = i / 2
     end
   end
 
-  def sink(i)
-    child1 = 2i
-    child2 = 2i + 1
+  def sink(k)
+    child1 = 2*k
+    child2 = 2*k + 1
 
     until child1 >= heap.length # no children or >= both children
-      if heap[child1] > heap[i]
-        heap[i], heap[child1] = heap[child1], heap[i]
-        i = child1
+      if heap[child1] > heap[k]
+        heap[k], heap[child1] = heap[child1], heap[k]
+        k = child1
       elsif child2 >= heap.length
         break
-      elsif heap[child2] > heap[i]
-        heap[i], heap[child2] = heap[child2], heap[i]
-        i = child2
+      elsif heap[child2] > heap[k]
+        heap[k], heap[child2] = heap[child2], heap[k]
+        k = child2
       else # both children are <=
         break
       end
 
-      child1 = 2i
-      child2 = 2i + 1
+      child1 = 2*k
+      child2 = 2*k + 1
     end
-  end
-
-  def empty?
-    heap.length <= 1
   end
 end
 
 # Test
 
-pq = PriorityQueue.new
+queue = PriorityQueue.new
+queue.insert 1
+queue.insert 29
+queue.insert 10
+queue.insert 4
+queue.insert 3
+queue.insert 2
+queue.insert 31
+queue.insert 22
+queue.insert 29
+queue.insert 30
+queue.insert 60
+queue.delete_max
+queue.delete_max
+queue.delete_max
+
+p queue.heap
