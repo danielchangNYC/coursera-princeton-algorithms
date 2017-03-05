@@ -1,11 +1,10 @@
 =begin
   Symbol Table is a hash or dictionary.
 
-  Uses two binary search trees.
-    One stores keys
-    Other stores values.
-    Keep both in sync
+  Strategies:
 
+  1. Uses two binary search trees. One stores keys Other stores values.
+    PROBLEM: Keeping both in sync
 =end
 
 class SymbolTable
