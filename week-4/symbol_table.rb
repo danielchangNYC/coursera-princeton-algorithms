@@ -2,9 +2,12 @@
   Symbol Table is a hash or dictionary.
 
   Strategies:
-
+  0. Sequential Search. Use a linked list. Costly. Bad.
   1. Uses two binary search trees. One stores keys Other stores values.
-    PROBLEM: Keeping both in sync
+    CONS:
+      Keeping both in sync
+      INSERTION SCALES LINEARLY :(
+
 =end
 
 class SymbolTable
