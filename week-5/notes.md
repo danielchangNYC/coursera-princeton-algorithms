@@ -44,3 +44,22 @@ CON:
 - no node has 2 red links
 - every path from root to null has hte same number of black links ("perfect black balance")
 - Red links lean left
+
+### B-Trees
+
+... are 2-3 trees except they hold M keys, where M is very large. So you have M-nodes (like 1024-nodes)
+
+- The keys are sorted in an array
+- Promote mid-key when array is full, split child into two
+  - generally, all nodes will be between half-full and full
+- up to M + 1 children per M-node
+
+COST: between log_(m-1) n and log(m/2) N
+USES: huge amounts of data (like a file system)
+  - Reduce number of "probes" to find a file (probe = first access to a page) (page = a contiguous block of data, e.g. a file or 4096-byte chunk)
+
+IN THE WILD:
+  - Windows: NTFS
+  - Mac: HFS(+)
+  - Linux: Several FS's
+  - DBs: Orache, SQL, PostgreSQL, INGRES, DB2
