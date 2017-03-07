@@ -71,7 +71,25 @@ class BST
     end
   end
 
+  def floor(key)
+    # ... is the greatest value <= key
+    f = traverse_floor key, root
+    f.nil? ? nil : f.key
+  end
+
   private
+
+  def traverse_floor(key, node)
+    return nil if node.nil?
+
+    if node.key == key
+      node
+    elsif key < node.key
+      traverse_floor key, node.left
+    else
+      traverse_floor(key, node.right) || node
+    end
+  end
 
   def traverse_and_put(current, key, val)
     return Node.new(key, val) if current.nil?
@@ -104,3 +122,5 @@ bst.put('apple', 5)
 
 bst.get 'caat'
 bst.print_tree
+
+bst.floor('br')
