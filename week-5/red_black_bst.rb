@@ -50,16 +50,36 @@ class RBTree
   def rotate_left(node)
     # sometimes nodes will lean right during insertion
     # this method orients a right-leaning red link to lean left
-    # Strategy: turn the "between" node to left_node.right, switch the colors
+    # Strategy: switch the "between" node, switch the colors
       # parent also needs to update. happens in caller (e.g. parent.left = rotate_left(parent.left))
 
     red_right = node.right
-    node.right = red_right.left
+    node.right = red_right.left # set to between-node
     red_right.left = node
 
     red_right.red = false
     node.red = true
     red_right
+  end
+
+  def rotate_right(node)
+    red_left = node.left
+    node.left = red_left.right # set to between-node
+    red_left.right = node
+
+    red_left.red = false
+    node.red = true
+    red_left
+  end
+
+  def flip_colors(node) # node is the middle key of a 4-node
+    # => Recolor to split a 4-node into two 2-nodes
+    # Idea: Merge node with parent
+
+    # For this to be a 4-node, both children of node have red-links
+    node.red = true
+    node.left.red = false
+    node.right.red = false
   end
 
   def red?(node)
