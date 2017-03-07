@@ -23,7 +23,7 @@
     3. Red links lean left (aka NO right-leaning red links)
 =end
 
-Node = Struct.new(:key, :value, :count, :left, :right, :red)
+Node = Struct.new(:key, :value, :red, :left, :right)
 
 class RBTree
   attr_accessor :root
@@ -44,7 +44,8 @@ class RBTree
     found_value ||= nil
   end
 
-  def insert(key)
+  def put(key, val)
+    self.root = traverse_and_put root, key, val
   end
 
   def rotate_left(node)
@@ -85,5 +86,71 @@ class RBTree
   def red?(node)
     return if node.nil?
     !!node.red
+  end
+
+  private
+
+  def traverse_and_put(current, key, val)
+    ######### Red-Black BST cases for red-links ###########
+
+    # Case 0: key found. replace val
+
+    # Case 1: insert into a 2-node (makes 3-node)
+      # 1. Insert w red-link (same as BST insert)
+      # 1a. if greater, then will have to rotate_left
+
+    # Case 2: insert into 3-node (makes 4-node)
+      # 1. Insert node w red-link (same as BST insert)
+      # 2. Rotate to balance 4-node, if needed
+        # => IF LARGER: Now have left && right red-links. Ready for flip / do nothing.
+        # => IF SMALLER: Now have left && left.left red-links. rotate_right(node)
+        # => IF BETWEEN: Now have left && left.right red-links. rotate_left(left) and rotate_right(node)
+      # 3. Flip at current_mid
+      # 4. Rotate to make lean-left, if needed (happens if promotion was to a right-node. must switch to make left again)
+      # 5. REPEAT CASE 1 OR 2 UP THE TREE IF NEEDED
+
+    # Same code handles all cases:
+      # left black && right red => ROTATE LEFT
+      # left red && left.left red => ROTATE RIGHT
+      # left red && right red => FLIP
+
+    #######################################################
+
+    ### 1. BST INSERT ###
+    return Node.new(key, val, true) if current.nil?
+
+    if key < current.key
+      current.left = traverse_and_put(current.left, key, val)
+    elsif key > current.key
+      current.right = traverse_and_put(current.right, key, val)
+    else # equal
+      current.value = val
+    end
+
+    ### 2. Update Links ###
+      # (same from above:)
+      # left black && right red => ROTATE LEFT
+      # left red && left.left red => ROTATE RIGHT
+      # left red && right red => FLIP
+
+    rotate_left(node) if leans_right? node
+    rotate_right(node) if left_double_red? node
+    flip_colors(node) if four_node_mid? node
+    # Note: left-red, left.right-red will be taken care of recursively.
+    # Only happens on promotion during flip_colors
+
+    current
+  end
+
+  def leans_right?(node)
+    !red?(node.left) && red?(node.right)
+  end
+
+  def left_double_red?(node)
+    red?(node.left) && node.left.left && red?(node.left.left)
+  end
+
+  def four_node_mid?(node)
+    red?(node.left) && red?(node.right)
   end
 end
