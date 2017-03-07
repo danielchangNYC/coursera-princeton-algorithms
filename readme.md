@@ -34,3 +34,6 @@ Data Structures:
   - Bags (Randomized Queue, rm arbitrary item)
   - Binary Heap
   - Binary Search Tree
+  - 2-3 trees
+  - red-black BSTs
+  - B-trees
