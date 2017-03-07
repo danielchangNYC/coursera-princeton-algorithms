@@ -77,6 +77,12 @@ class BST
     f.nil? ? nil : f.key
   end
 
+  def ceiling(key)
+    # ... is the smallest value >= key
+    f = traverse_ceiling key, root
+    f.nil? ? nil : f.key
+  end
+
   private
 
   def traverse_floor(key, node)
@@ -88,6 +94,18 @@ class BST
       traverse_floor key, node.left
     else
       traverse_floor(key, node.right) || node
+    end
+  end
+
+  def traverse_ceiling(key, node)
+    return nil if node.nil?
+
+    if node.key == key
+      node
+    elsif key < node.key
+      traverse_ceiling(key, node.left) || node
+    else
+      traverse_ceiling key, node.right
     end
   end
 
