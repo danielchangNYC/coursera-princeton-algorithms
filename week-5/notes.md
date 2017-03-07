@@ -63,3 +63,65 @@ IN THE WILD:
   - Mac: HFS(+)
   - Linux: Several FS's
   - DBs: Orache, SQL, PostgreSQL, INGRES, DB2
+
+## Geometric Applications
+
+### 1d Range Search
+
+Extends Ordered Symbol Table:
+  - Range search: find all keys between a and b
+  - Range count
+
+Used for database queries
+
+Geometric Interpretation:
+  - Keys are points on a line
+  - Find/count points within an interval
+
+Implementation:
+  - Recursive tree search, depending on comparison results
+
+#### Line Segment Intersection
+
+*Example of a 1D Range Search*
+
+Given a bounded set of horizontal and vertical line segments, how many intersections are there?
+
+Possible worst cases by strategy:
+  - N^2 time (check each line segment against every other one)
+  - NLogN (vertical line sweep: N for processing each "swept" event, logN for searches for possible intersection)
+
+### KD (K-dimensional) Trees
+
+*Example of a 2D Range Search*
+
+Extends BST; process points in space
+
+Examples of 2-d orthogonal range search
+  1. Given points in a plane and a rectangle drawn in the plane, how many points lie inside the rectangle? (In other words, the intersection is 2-D)
+  2. Find closest point to another point
+
+Strategy:
+  - Use branches from nodes to represent the different sides of a line (vert or horizontal, alternating) drawn through a point
+
+Notes:
+  - Often times we find points in clusters (e.g. flocking birds)
+  - Has been used to model the N-body problem
+
+### 1d interval search
+
+Given a set of **intervals**, insert/search
+
+Insert:
+  - Use `lo` of range as the BST key
+  - also store `hi` of the node AND its subtrees as `max`
+Search: (does the interval intersect with another in the tree?)
+  - a **intersects** with b iff there is (any) overlap
+  - Determine whether to go left or right depending on the `max`
+  - R log N run-time
+
+### Orthogonal Rectangle Intersection
+
+Strategy:
+  - Sweep search but with interval search tree
+  - Linearithmic time
