@@ -46,4 +46,24 @@ class RBTree
 
   def insert(key)
   end
+
+  def rotate_left(node)
+    # sometimes nodes will lean right during insertion
+    # this method orients a right-leaning red link to lean left
+    # Strategy: turn the "between" node to left_node.right, switch the colors
+      # parent also needs to update. happens in caller (e.g. parent.left = rotate_left(parent.left))
+
+    red_right = node.right
+    node.right = red_right.left
+    red_right.left = node
+
+    red_right.red = false
+    node.red = true
+    red_right
+  end
+
+  def red?(node)
+    return if node.nil?
+    !!node.red
+  end
 end
