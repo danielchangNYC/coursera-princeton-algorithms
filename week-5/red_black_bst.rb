@@ -21,6 +21,11 @@
     1. No node has 2 red links
     2. Every path from root to null link has same number of black links
     3. Red links lean left (aka NO right-leaning red links)
+
+  COST:
+    - Worst case is 2lgN
+      - Every path from root to null link has the same number of black links
+      - Never two red links in a row
 =end
 
 Node = Struct.new(:key, :value, :red, :left, :right)
