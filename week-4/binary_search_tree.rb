@@ -26,7 +26,8 @@
         - BUT if it's a new node, you have the added benefit of setting that without tracking prev_node
 =end
 
-Node = Struct.new(:key, :value, :left, :right)
+Node = Struct.new(:key, :value, :count, :left, :right)
+# count == nodes in subtree
 
 class BST
   attr_accessor :root
@@ -83,6 +84,14 @@ class BST
     f.nil? ? nil : f.key
   end
 
+  def size
+    root.count
+  end
+
+  def size_at(node = nil)
+    node.nil? ? 0 : node.count
+  end
+
   private
 
   def traverse_floor(key, node)
@@ -110,7 +119,7 @@ class BST
   end
 
   def traverse_and_put(current, key, val)
-    return Node.new(key, val) if current.nil?
+    return Node.new(key, val, 1) if current.nil?
 
     if key < current.key
       current.left = traverse_and_put(current.left, key, val)
@@ -120,6 +129,7 @@ class BST
       current.value = val
     end
 
+    current.count = 1 + size_at(current.left) + size_at(current.right)
     current
   end
 end
@@ -142,3 +152,4 @@ bst.get 'caat'
 bst.print_tree
 
 bst.floor('br')
+bst.size
