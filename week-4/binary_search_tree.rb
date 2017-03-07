@@ -254,4 +254,5 @@ bst.rank 'banana'
 bst.rank 'ban'
 bst.keys
 
-bst.delete('daat')
+bst.delete('dbaabat')
+bst.print_tree
