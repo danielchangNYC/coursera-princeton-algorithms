@@ -1,6 +1,11 @@
 =begin
   Binary Search Tree (BST)
 
+  COST OF METHODS
+    - #keys => N
+    - Everything else is log N
+      - EXCEPT: Hibbard Delete, which could lead to one-sided imbalanced tree with sqrt(n) height
+
   A Binary Tree is either:
     - empty
     - 2 disjoin binary trees (left and right) (can hold null links!)
@@ -84,15 +89,104 @@ class BST
     f.nil? ? nil : f.key
   end
 
+  def rank(key)
+    # how many nodes where node.key < key? Note: key is not necessarily in the tree
+    traverse_rank root, key
+  end
+
+  def keys(node = root, queue = [])
+    # recursively return all left, then return all right
+    return if node.nil?
+    keys node.left, queue
+    queue.push node.key
+    keys node.right, queue
+    queue
+  end
+
   def size
     root.count
+  end
+
+  def delete(key)
+    # Hibbard Deletion Method
+    hibbard_delete(key, root)
+  end
+
+  def min(node)
+    return nil if node.nil?
+    return node if node.left.nil?
+    min node.left
+  end
+
+  private
+
+  def hibbard_delete(key, node)
+    return nil if node.nil?
+
+    if key < node.key
+      # find match on left side. set with what returns
+      node.left = hibbard_delete(key, node.left)
+    elsif key > node.key
+      # find match on right side. set with what returns
+      node.right = hibbard_delete(key, node.right)
+    else # found a match!
+      # Case 1: No Children
+      return nil if node.left.nil? && node.right.nil?
+
+      # Case 2: 1 Child
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      # Case 3: 2 Children
+      # replace the node with the minumum of the right child, a.k.a the next largest
+
+      next_largest = hibbard_delete_min node.right
+      left = node.left
+
+      if next_largest == node.right
+        right = next_largest.right
+      else
+        right = node.right
+      end
+
+      # Set node to next_largest, update its left and right attrs
+      node = next_largest
+      node.left = left
+      node.right = right
+    end
+
+    node
+  end
+
+  def hibbard_delete_min(node)
+    parent = nil
+
+    until node.left.nil?
+      parent = node
+      node = node.left
+    end
+
+    # before swapping (above) point parent.left to the next-smallest, node.right. (traversed to no more leftside already)
+    parent.left = node.right if !parent.nil?
+    node
   end
 
   def size_at(node = nil)
     node.nil? ? 0 : node.count
   end
 
-  private
+  def traverse_rank(node, key)
+    return 0 if node.nil?
+
+    if key == node.key
+      size_at node.left
+    elsif key < node.key
+      traverse_rank node.left, key
+    else
+      # if key is greater, count this node, all on left, and keep traversing right
+      1 + size_at(node.left) + traverse_rank(node.right, key)
+    end
+  end
 
   def traverse_floor(key, node)
     return nil if node.nil?
@@ -138,9 +232,11 @@ end
 
 bst = BST.new
 bst.put('cat', 5)
+bst.put('dbaabat', 5)
 bst.put('caat', 5)
 bst.put('daat', 5)
 bst.put('dabat', 5)
+bst.put('dbabat', 5)
 bst.put('banana', 6)
 bst.put('caat', 15)
 bst.put('baanana', 5)
@@ -153,3 +249,9 @@ bst.print_tree
 
 bst.floor('br')
 bst.size
+
+bst.rank 'banana'
+bst.rank 'ban'
+bst.keys
+
+bst.delete('daat')
