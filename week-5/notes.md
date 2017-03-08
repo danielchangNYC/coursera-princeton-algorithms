@@ -1,5 +1,7 @@
 # Week 5: Balanced Search Trees and Geometric Applications
 
+Note: These are implementations of symbol tables.
+
 ## Balanced Search Trees
 
 ### 2-3 Tree
