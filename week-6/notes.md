@@ -52,4 +52,28 @@ Separate chaining symbol table
 
 ### Collision Handling Strategy 2: Linear Probing
 
+- Array of flexible size, always > number of nodes
+- Insert at idx. If occupied, traverse +1 until there's an empty slot.
+- Search is similar. Hash, traverse, find (or not)
+
 ## ST Applications
+
+Separate Chaining vs Linear Probing
+  - Separate Chaining
+    - Easier to implement delete
+    - Performance degrades gracefully
+    - Clustering less sensitive to poorly-designed hash function
+  - Linear Probing
+    - Less wasted space
+    - Better cache performance
+
+Hash table vs Balanced search trees
+  - Hash tables
+    - **Faster for simple keys** (arithmetic operations vs logN compares)
+    - No effective alternative for unordered keys
+    - Simpler to code
+    - Better system support in Java and some other langs for strings (e.g. cached hash code)
+  - Balanced Search Trees
+    - **Stronger performance guarantee**
+    - **Support for ordered search tree operations**
+    - Easier to implement `compareTo` correctly than `equals` and `hashCode`
